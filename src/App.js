@@ -4,14 +4,20 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Col from 'react-bootstrap/Col';
+
 import HomePage from './pages/HomePage';
 import ContactPage from './pages/ContactPage';
-import NotFound from './pages/NotFound'
+import NotFound from './pages/NotFound';
+import ProjectsPage from './pages/ProjectsPage';
+
+import Aquarium from './Aquarium/Aquarium';
 
 function App() {
   const home = HomePage();
   const contact = ContactPage();
   const notFound = NotFound();
+  const projects = ProjectsPage();
+  const aquarium = Aquarium();
 
   // routing -- replace with ReactRouter someday, maybe?
   let currentPage = home;
@@ -24,6 +30,12 @@ function App() {
       break;
     case "/contact":
       currentPage = contact;
+      break;
+    case "/projects":
+      currentPage = projects;
+      break;
+    case "/aquarium":
+      currentPage = aquarium;
       break;
     default:
       currentPage = notFound;
