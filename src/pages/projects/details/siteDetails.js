@@ -10,7 +10,7 @@ const pageText = (
         <ul>
             <li>Basics of React Router</li>
             <li>Lots of new stuff about Bootstrap and React Bootstrap</li>
-            <li>Google Cloud hosting and deployment basics</li>
+            <li>Hosting and deployment basics with Netlify</li>
         </ul>
         <h2>Details I'm proud of</h2>
         <ul>
