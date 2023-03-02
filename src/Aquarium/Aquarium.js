@@ -1,7 +1,6 @@
 import React from 'react';
-import { Container, Col, OverlayTrigger } from 'react-bootstrap';
+import { Container, Col } from 'react-bootstrap';
 import { Button, ToggleButton } from 'react-bootstrap';
-import { Tooltip } from 'react-bootstrap';
 import './Aquarium.css';
 
 export default function Aquarium() {
@@ -72,10 +71,6 @@ export default function Aquarium() {
       for (let i = (this.state.size * n); i < (this.state.size * (n + 1)); i++) {
         cells.push(this.renderCell(i));
       }
-      let heading = 0;
-      getRow(n, this.state.solution).forEach(cell => {
-        heading += cell;
-      });
       return (
         <div className="puzzle-row" key={n}>
           {this.renderRowHeading(n)}
@@ -111,7 +106,7 @@ export default function Aquarium() {
         if (cell) {current_row_value ++;}
       });
       if (this.state.header_hints) {
-        if (correct_row_value == current_row_value) {
+        if (correct_row_value === current_row_value) {
           style.color = "gray";
         }
         else if (correct_row_value < current_row_value) {
@@ -137,7 +132,7 @@ export default function Aquarium() {
         if(cell) {current_col_value ++;}
       });
       if (this.state.header_hints) {
-        if (correct_col_value == current_col_value) {
+        if (correct_col_value === current_col_value) {
           style.color = "gray";
         }
         else if (correct_col_value < current_col_value) {
@@ -164,20 +159,20 @@ export default function Aquarium() {
       const coords = getCoords(n, this.state.containers);
       let borders = {};
       // checks to see if the cell needs horizontal borders (i.e. is it in a different container than the cell immediately to its side)
-      const right = this.state.containers[n] != this.state.containers[n + 1] && coords.col != (this.state.size - 1)
+      const right = this.state.containers[n] !== this.state.containers[n + 1] && coords.col !== (this.state.size - 1)
       if(right) {
         borders.borderRight = borderStyleString;
       }
-      const left = this.state.containers[n] != this.state.containers[n - 1] && coords.col != 0
+      const left = this.state.containers[n] !== this.state.containers[n - 1] && coords.col !== 0
       if(left) {
         borders.borderLeft = borderStyleString;
       }
       // same deal for columns
-      const bottom = getColumn(coords.col, this.state.containers)[coords.row] !=  getColumn(coords.col, this.state.containers)[coords.row + 1] && coords.row != (this.state.size - 1);    
+      const bottom = getColumn(coords.col, this.state.containers)[coords.row] !==  getColumn(coords.col, this.state.containers)[coords.row + 1] && coords.row !== (this.state.size - 1);    
       if(bottom) {
         borders.borderBottom = borderStyleString;
       }
-      const top = getColumn(coords.col, this.state.containers)[coords.row] !=  getColumn(coords.col, this.state.containers)[coords.row - 1] && coords.row != 0;
+      const top = getColumn(coords.col, this.state.containers)[coords.row] !==  getColumn(coords.col, this.state.containers)[coords.row - 1] && coords.row !== 0;
       if(top) {
         borders.borderTop = borderStyleString;
       }
@@ -236,7 +231,7 @@ export default function Aquarium() {
     }
   
     renderCompletionMessage(){
-      if(this.state.correct != null) {
+      if(this.state.correct !== null) {
         return <div className='mt-4'>{this.state.correct ? "Solution is correct!" : "Errors are present!"}</div>
       }
     }
@@ -250,7 +245,7 @@ export default function Aquarium() {
           var valid_move = true;
           var impacted_cells = [];
           for(var i = 0; i < this.state.fullMarks.length; i ++) {
-            if ((this.state.containers[i] == this.state.containers[n]) && (getCoords(i, this.state.containers).row <= getCoords(n, this.state.containers).row)) {
+            if ((this.state.containers[i] === this.state.containers[n]) && (getCoords(i, this.state.containers).row <= getCoords(n, this.state.containers).row)) {
               impacted_cells.push(i);
             }
           }
@@ -269,8 +264,8 @@ export default function Aquarium() {
         else {
           // right-clicked a red cell in fill mode; removes red at that level and below
           var fills = [];
-          for (var i = 0; i < this.state.containers.length; i++){
-            if ((this.state.containers[i] == this.state.containers[n]) && (getCoords(i, this.state.containers).row >= getCoords(n, this.state.containers).row)) {
+          for (i = 0; i < this.state.containers.length; i++){
+            if ((this.state.containers[i] === this.state.containers[n]) && (getCoords(i, this.state.containers).row >= getCoords(n, this.state.containers).row)) {
               fills.push(i);
             }
           }
@@ -296,7 +291,7 @@ export default function Aquarium() {
           // get a list of all cells that need to be filled
           var fills = [];
           for (var i = 0; i < this.state.containers.length; i++) {
-            if ((this.state.containers[i] == this.state.containers[n]) && (getCoords(i, this.state.containers).row >= getCoords(n, this.state.containers).row)){
+            if ((this.state.containers[i] === this.state.containers[n]) && (getCoords(i, this.state.containers).row >= getCoords(n, this.state.containers).row)){
               fills.push(i);
             }
           }
@@ -307,8 +302,8 @@ export default function Aquarium() {
         else {
           // clicked a full cell in fill mode; empties blue from container at that level and above
           var empties = [];
-          for (var i = 0; i < this.state.containers.length; i++) {
-            if ((this.state.containers[i] == this.state.containers[n]) && (getCoords(i, this.state.containers).row <= getCoords(n, this.state.containers).row)){
+          for (i = 0; i < this.state.containers.length; i++) {
+            if ((this.state.containers[i] === this.state.containers[n]) && (getCoords(i, this.state.containers).row <= getCoords(n, this.state.containers).row)){
               empties.push(i);
             }
           }
@@ -336,7 +331,7 @@ export default function Aquarium() {
         }
       });
       for(let i = 0; i < attempt.length; i++) {
-        if(attempt[i] != this.state.solution[i]){
+        if(attempt[i] !== this.state.solution[i]){
           isAttemptCorrect = false;
         }
       }
@@ -387,7 +382,7 @@ export default function Aquarium() {
     let size = Math.sqrt(array.length);
     let col = [];
     for (let i = 0; i < array.length; i++){
-      if (i % size == n % size) {
+      if (i % size === n % size) {
         col.push(array[i]);
       }
     }
