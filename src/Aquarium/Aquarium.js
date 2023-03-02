@@ -6,8 +6,8 @@ import './Aquarium.css';
 export default function Aquarium() {
     return (
       <Container className="App-header flex-fill align-items-center justify-content-center">
-        <Col className="col-6 justify-content-center">
-          <div className="p-4 rounded" style={{backgroundColor: "rgba(10, 10, 10, 0.7)"}}>
+        <Col className="col-md-6 justify-content-center">
+          <div className="mt-4 p-4 rounded" style={{backgroundColor: "rgba(10, 10, 10, 0.7)"}}>
             <div className="puzzle">
             <Puzzle 
             containerArray={[1, 1, 1, 2, 3, 3, 4, 1, 5, 2, 2, 6, 4, 5, 5, 7, 2, 6, 5, 5, 7, 7, 8, 8, 7, 7, 7, 8, 8, 8, 9, 9, 7, 7, 7, 7]}

@@ -10,6 +10,7 @@ function App() {
   return (
     <>
       <link href='https://fonts.googleapis.com/css2?family=Abel' rel='stylesheet' />
+      <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500&display=swap" rel="stylesheet"></link>
       <div className="App d-flex flex-column">
         <Navbar variant="dark" style={{backgroundColor: "rgba(10, 10, 10, 0.7)"}}>
           <Container>
