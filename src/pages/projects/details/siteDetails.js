@@ -23,6 +23,9 @@ const pageText = (
             <li>
                 I had initially planned to use Bootstrap for this page because I thought I'd be using Bootstrap's built-in components much more.  As it turned out, I needed lots of things to be tweaked slightly and have committed utility class abuse all over this site because of it.  If I were starting over today, I'd choose something like TailwindCSS that is built for that approach.
             </li>
+            <li>
+                On a meta level, I was not terribly responsible with my version control and branch management during development of this site; making more controlled, deliberate changes would have been better.
+            </li>
         </ul>
     </>
 );
