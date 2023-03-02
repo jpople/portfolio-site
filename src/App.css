@@ -16,6 +16,10 @@ body {
   color: white;
 }
 
+ul {
+  list-style-type: "- ";
+}
+
 p a {
   color: rgb(200, 200, 200, 1);
   text-decoration: none;
@@ -23,4 +27,35 @@ p a {
 
 p a:hover {
   color: rgba(230, 230, 230, 1);
+}
+
+h1 a {
+  color: rgb(255, 255, 255, 1);
+  text-decoration: none;
+}
+
+h1 a:hover {
+  color: rgba(230, 230, 230, 1);
+}
+
+code {
+  color: rgba(200, 200, 200, 1)!important;
+}
+
+@media only screen and (max-width: 991px) {
+  .project-image {
+    width: 100%;
+  }
+  .project-info {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .project-image {
+    width: 30%;
+  }
+  .project-info {
+    width: 70%;
+  }
 }
