@@ -1,16 +1,16 @@
 const pageText = (
     <>
         <p>
-            This web site! A project I threw together to show off my other work, and also keep my React skills from rusting after I had been focusing on game development for a few months.
+            This website! A project I threw together to show off my other work, and also keep my React skills from rusting after I had been focusing on game development for a few months.
         </p>
         <p>
-            The site doesn't have a real backend, all the information like what you're reading is hardcoded&mdash; <i>but</i> it's hardcoded as JSON objects, not unlike what a real backend would yield, and repeated elements are generated sensibly from those JSONs as React components.
+            The site doesn't have a real backend, so all the information like what you're reading is hardcoded&mdash; <i>but</i> it's hardcoded as JSON objects, not unlike what a real backend would yield, and repeated elements are generated sensibly from those JSONs as React components.
         </p>
         <h2>What I learned making this</h2>
         <ul>
-            <li>React Router</li>
+            <li>Basics of React Router</li>
             <li>Lots of new stuff about Bootstrap and React Bootstrap</li>
-            <li>Gcloud hosting and deployment basics</li>
+            <li>Google Cloud hosting and deployment basics</li>
         </ul>
         <h2>Details I'm proud of</h2>
         <ul>
@@ -24,7 +24,7 @@ const pageText = (
                 I had initially planned to use Bootstrap for this page because I thought I'd be using Bootstrap's built-in components much more.  As it turned out, I needed lots of things to be tweaked slightly and have committed utility class abuse all over this site because of it.  If I were starting over today, I'd choose something like TailwindCSS that is built for that approach.
             </li>
             <li>
-                On a meta level, I was not terribly responsible with my version control and branch management during development of this site; making more controlled, deliberate changes would have been better.
+                This hopefully hasn't impacted the final product much, but I was not terribly responsible with my version control and branch management during development of this site; making more controlled, deliberate changes would have been better.
             </li>
         </ul>
     </>
@@ -32,7 +32,7 @@ const pageText = (
 
 const siteDetails = {
     title: "jeremypople.dev",
-    sourceLink: null, // make sure to add this later
+    sourceLink: "https://github.com/jpople/portfolio-site",
     playLink: "/",
     videoLink: null,
     pageText: pageText

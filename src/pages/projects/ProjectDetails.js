@@ -17,6 +17,7 @@ export default function ProjectDetails({projectDetails}) {
                     <p><a href={projectDetails.sourceLink}>[source code]</a></p>
                 </div>
             {projectDetails.pageText}
+            <p><a href="/projects">[back to projects]</a></p>
           </div>
         </Col>
       </Container>

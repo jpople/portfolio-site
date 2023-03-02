@@ -15,11 +15,14 @@ import ProjectDetails from './pages/projects/ProjectDetails';
 import pipeHackerDetails from './pages/projects/details/pipeHackerDetails';
 import swordGameDetails from './pages/projects/details/swordGameDetails';
 import siteDetails from './pages/projects/details/siteDetails';
+import aquariumDetails from './pages/projects/details/aquariumDetails';
+import NotFoundPage from './pages/NotFound';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         index: true,
@@ -42,13 +45,17 @@ const router = createBrowserRouter([
         element: <ProjectDetails projectDetails={siteDetails} />
       },
       {
-        path: "/contact",
-        element: <ContactPage />
+        path: "/projects/aquarium/about",
+        element: <ProjectDetails projectDetails={aquariumDetails} />
       },
       {
         path: "/projects/aquarium/play",
         element: <Aquarium />
-      }
+      },
+      {
+        path: "/contact",
+        element: <ContactPage />
+      },
     ]
   }
 ])
