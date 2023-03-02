@@ -3,7 +3,7 @@ import {Container, Col} from 'react-bootstrap';
 export default function ContactPage() {
     return (
       <Container className="App-header flex-fill align-items-center justify-content-center">
-        <Col className="col-6 justify-content-center">
+        <Col className="col-sm-6 justify-content-center">
           <div className="mt-4 p-4 rounded" style={{backgroundColor: "rgba(10, 10, 10, 0.7)"}}>
             <h1>Contact</h1>
             <p>
