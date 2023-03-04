@@ -10,8 +10,9 @@ export default function HomePage() {
               I'm Jeremy Pople, a front-end web and game developer based in Pittsburgh, PA. 
             </p>
             <p>
-              I made this site!  There are pages for it and some other (arguably more interesting) things I've made are over in <a href="/projects">[projects]</a> where you can look at them, try them out, and read some of my thoughts about them.
+              I built this site in React!  Check out <a href="/projects">[projects]</a> to learn more about it, along with several other things that I've made that are arguably more interesting.
             </p>
+            <p>Thanks for stopping by!</p>
           </div>
         </Col>
       </Container>

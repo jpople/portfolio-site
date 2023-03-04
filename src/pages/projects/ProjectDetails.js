@@ -7,8 +7,8 @@ export default function ProjectDetails({projectDetails}) {
       </div>
     );
     return (
-        <Container className="App-header flex-fill align-items-center justify-content-center">
-        <Col className="col-8 justify-content-center">
+      <Container className="App-header flex-fill align-items-center justify-content-center">
+        <Col className="col-md-8 justify-content-center">
           <div className="mt-4 p-4 rounded" style={{backgroundColor: "rgba(10, 10, 10, 0.7)"}}>
             {projectDetails.videoLink && videoEmbed}
             <h1>{projectDetails.title}</h1>
