@@ -17,6 +17,7 @@ import swordGameDetails from './pages/projects/details/swordGameDetails';
 import siteDetails from './pages/projects/details/siteDetails';
 import aquariumDetails from './pages/projects/details/aquariumDetails';
 import NotFoundPage from './pages/NotFound';
+import TongueTip from './tongue-tip/TongueTip';
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/projects/aquarium/play",
         element: <Aquarium />
+      },
+      {
+        path: "/projects/tongue-tip",
+        element: <TongueTip />
       },
       {
         path: "/contact",
