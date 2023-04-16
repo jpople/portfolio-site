@@ -1,4 +1,3 @@
-import {useEffect} from 'react';
 import {Spinner, Button} from 'react-bootstrap';
 
 export default function SearchResults({ word, isLoading, returnToSearch }) {
