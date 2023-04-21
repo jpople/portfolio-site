@@ -15,7 +15,7 @@ export default function SearchResults({ word, isLoading, returnToSearch }) {
                     return <li key={word.indexOf(entry)}>{text}</li>; 
                 })}
             </ul>
-            <Button variant="outline-light" onClick={returnToSearch}>Return to search page</Button>
+            <Button variant="outline-light" onClick={() => returnToSearch(true)}>New search</Button>
         </>
     }
 }

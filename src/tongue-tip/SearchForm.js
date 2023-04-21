@@ -1,6 +1,7 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
+import relationOptions from "./relationOptions";
 
-export default function SearchForm({ handleSearch, handleUpdate, handleSelectType, relationOptions, selectedRelation }) {
+export default function SearchForm({ handleSearch, handleUpdateText, handleUpdateRelationType, handleUpdateRelatedWord, relations, addNewRelation, deleteRelation }) {
     return(
         <Form autoComplete="off" onSubmit={handleSearch}>
             <Form.Group controlId="meaning">
@@ -9,7 +10,7 @@ export default function SearchForm({ handleSearch, handleUpdate, handleSelectTyp
                     type="input" 
                     name="ml" 
                     placeholder="e.g. 'present or found everywhere' → 'ubiquitous'" 
-                    onChange={handleUpdate} 
+                    onChange={handleUpdateText} 
                 />
             </Form.Group>
             <Form.Group className="mt-3" controlId="pronunciation">
@@ -18,7 +19,7 @@ export default function SearchForm({ handleSearch, handleUpdate, handleSelectTyp
                     type="input" 
                     name="sl" 
                     placeholder="e.g. 'yukalayli' → 'ukulele'" 
-                    onChange={handleUpdate} 
+                    onChange={handleUpdateText} 
                 />
             </Form.Group>
             <Form.Group className="mt-3" controlId="spelling">
@@ -27,53 +28,18 @@ export default function SearchForm({ handleSearch, handleUpdate, handleSelectTyp
                     type="input" 
                     name="sp" 
                     placeholder="e.g. 'incandessant' → 'incandescent'" 
-                    onChange={handleUpdate} 
+                    onChange={handleUpdateText} 
                     aria-describedby="spellingTipBlock"
                 />
                 <Form.Text id="spellingTipBlock">This field supports the wildcards <code>*</code> for any number of unknown characters and <code>?</code> for exactly one unknown character.</Form.Text>
             </Form.Group>
-            <Row className="mt-3">
-                {/* <Form.Group as={Col} xs={5} controlId="relation-type">
-                    <Form.Select aria-label="Select relation type">
-                        <option>Select relation type</option>
-                        <optgroup label="Semantic">
-                            <option value="syn">Synonym of</option>
-                            <option value="ant">Antonym of</option>
-                            <option value="spc">More specific than</option>
-                            <option value="gen">Less specific than</option>
-                            <option value="com">Part of</option>
-                            <option value="par">Comprises</option>
-                        </optgroup>
-                        <optgroup label="Phonetic">
-                            <option value="hom">Homophone of</option>
-                            <option value="cns">Same consonants as</option>
-                            <option value="rhy">Strictly rhymes with</option>
-                            <option value="nry">Loosely rhymes with</option>
-                        </optgroup>
-                        <optgroup label="Contextual">
-                            <option value="jja">Often modifies</option>
-                            <option value="jjb">Often modified by</option>
-                            <option value="trg">Appears in same text with</option>
-                            <option value="bga">Often precedes</option>
-                            <option value="bgb">Often follows</option>
-                        </optgroup>
-                    </Form.Select>
-                </Form.Group>
-                <Form.Group as={Col} controlId="relation-keyword">
-                    <Form.Control
-                        type="input"
-                        name="rel_jjb"
-                        placeholder="e.g. '' → ''"
-                        onChange={handleUpdate}
-                    />
-                </Form.Group> */}
-                <RelationSearch 
-                    handleUpdate={handleUpdate} 
-                    handleSelectType={handleSelectType}
-                    relationOptions={relationOptions}
-                    selectedRelation={selectedRelation}
-                />
-            </Row>
+            <RelationSearch 
+                relations={relations}
+                handleUpdateRelationType={handleUpdateRelationType}
+                handleUpdateRelatedWord={handleUpdateRelatedWord}
+                addNewRelation={addNewRelation}
+                deleteRelation={deleteRelation}
+            />
             <Form.Group className="mt-3">
                 <Button variant="outline-light" type="submit">Search</Button>
             </Form.Group>
@@ -81,31 +47,43 @@ export default function SearchForm({ handleSearch, handleUpdate, handleSelectTyp
     )
 }
 
-function RelationSearch({ handleSelectType, handleUpdate, relationOptions, selectedRelation }) {
+function RelationSearch({ relations, handleUpdateRelationType, handleUpdateRelatedWord, addNewRelation, deleteRelation }) {
     return <>
-        <Form.Group as={Col} xs={5} controlId="relation-type">
-            <Form.Select aria-label="Select relation type" onChange={handleSelectType}>
-                <option value=''>Select relation type</option>
-                {Object.keys(relationOptions).map((key) => {
-                    return <option value={key} key={key}>{relationOptions[key].optionLabel}</option>
-                })}
-            </Form.Select>
-        </Form.Group>
-        <Form.Group as={Col} controlId="relation-keyword">
-            {selectedRelation === '' ?
-                <Form.Control
-                    type="input"
-                    name="related-word"
-                    placeholder={""}
-                    disabled
-                /> :
-                <Form.Control
-                    type="input"
-                    name={`rel_${selectedRelation}`}
-                    placeholder={`e.g. '${relationOptions[selectedRelation].exampleParam}' →'${relationOptions[selectedRelation].exampleResult}'`}
-                    onChange={handleUpdate}
-                />
-            }
-        </Form.Group>
+        {relations.map((rel, index) => {
+            return <Row key={index} className="mt-3">
+                <Form.Group as={Col} xs={5} controlId={`relation-type-${index}`}>
+                    <Form.Select aria-label="relation type" onChange={(event) => handleUpdateRelationType(event, index)}>
+                        <option value=''>Choose relation type</option>
+                        {Object.keys(relationOptions).map((key) => {
+                            return <option 
+                                value={key} 
+                                key={key}
+                            >
+                                {relationOptions[key].optionLabel}
+                            </option>
+                        })}
+                    </Form.Select>
+                </Form.Group>
+                <Form.Group as={Col} controlId={`relation-keyword-${index}`}>
+                    {rel.relCode === '' ?
+                        <Form.Control
+                            type="input"
+                            name="related-word"
+                            disabled    
+                        /> :
+                        <Form.Control
+                            type="input"
+                            name={`related-word-${index}`}
+                            onChange={(event) => handleUpdateRelatedWord(event, index)}
+                            placeholder={relationOptions[rel.relCode].exampleString}
+                        />
+                        }
+                </Form.Group>
+                <Col xs={2}>
+                    <Button variant="outline-danger" type="button" onClick={() => deleteRelation(index)}>Remove</Button>
+                </Col>
+            </Row>;
+        })}
+        <Button variant="outline-light" type="button" className="mt-3" onClick={addNewRelation}>Add related word</Button>
     </>;
 }

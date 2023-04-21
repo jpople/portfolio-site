@@ -1,26 +1,28 @@
 import {Container, Col} from 'react-bootstrap';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import SearchResults from './SearchResults';
 import SearchForm from './SearchForm';
-import relationOptions from './relationOptions';
 
 export default function TongueTip() {
     const emptyQuery = {
         ml: '',
         sl: '',
         sp: '',
-        rel_jjb: '',
-        rel_syn: ''
     }
 
     const [isSearching, setIsSearching] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [searchResult, setSearchResult] = useState([]);
     const [queryParams, setQueryParams] = useState(emptyQuery);
-    const [selectedRel, setSelectedRel] = useState('');
+    const [relatedWords, setRelatedWords] = useState([]);
 
-    const handleSearch = () => {
+    useEffect(() => {
+        console.log(relatedWords);
+    }, [relatedWords])
+
+    const handleSearch = (event) => {
+        event.preventDefault();
         console.log(queryParams);
         const queryString = prepareQueryString();
         setIsSearching(false);
@@ -45,6 +47,18 @@ export default function TongueTip() {
         setQueryParams(values => ({...values, [name]: value}));
     }
 
+    const handleUpdateRelationType = (event, index) => {
+        const relations = [...relatedWords];
+        relations[index].relCode = event.target.value;
+        setRelatedWords(relations);
+    }
+
+    const handleUpdateRelatedWord = (event, index) => {
+        const relations = [...relatedWords];
+        relations[index].value = event.target.value;
+        setRelatedWords(relations);
+    }
+
     const prepareQueryString = () => {
         let query = `https://api.datamuse.com/words?md=d&max=20`;
         // gotta be some nice way to do this programmatically, right...?
@@ -57,24 +71,34 @@ export default function TongueTip() {
         if (queryParams.sp !== '') {
             query += `&sp=${queryParams.sp}`;
         }
-        if (queryParams.rel_jjb !== '') {
-            query += `&rel_jjb=${queryParams.rel_jjb}`;
-        }
-        if (queryParams.rel_syn !== '') {
-            query += `&rel_syn=${queryParams.rel_syn}`;
-        }
+        relatedWords.forEach((word) => {
+            if (word.relCode !== '' && word.value !== '') {
+                query += `&rel_${word.relCode}=${word.value}`;
+            }
+        })
         console.log(query);
         return query;
     }
 
-    const returnToSearch = () => {
-        setQueryParams(emptyQuery);
-        setSelectedRel('');
+    const returnToSearch = (reset) => {
+        if(reset) {
+            setQueryParams(emptyQuery);
+            setRelatedWords([]);
+        }
         setIsSearching(true);
     }
 
-    const handleSelectType = (event) => {
-        setSelectedRel(event.target.value);
+    const addNewRelation = () => {
+        const newRelation = {
+            relCode: "",
+            value: ""
+        };
+        setRelatedWords([...relatedWords, newRelation]);
+    }
+
+    const deleteRelation = (index) => {
+        const updatedRelations = relatedWords.toSpliced(index, 1);
+        setRelatedWords(updatedRelations);
     }
 
     return (
@@ -85,10 +109,12 @@ export default function TongueTip() {
                     {isSearching ? 
                         <SearchForm 
                             handleSearch={handleSearch} 
-                            handleUpdate={handleUpdateQuery}
-                            handleSelectType={handleSelectType} 
-                            relationOptions={relationOptions}
-                            selectedRelation={selectedRel}
+                            handleUpdateText={handleUpdateQuery}
+                            handleUpdateRelationType={handleUpdateRelationType}
+                            handleUpdateRelatedWord={handleUpdateRelatedWord}
+                            relations={relatedWords}
+                            addNewRelation={addNewRelation}
+                            deleteRelation={deleteRelation}
                         /> 
                         : 
                         <SearchResults 
