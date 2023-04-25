@@ -1,5 +1,5 @@
 import {Container, Col} from 'react-bootstrap';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import SearchResults from './SearchResults';
 import SearchForm from './SearchForm';
@@ -9,6 +9,8 @@ export default function TongueTip() {
         ml: '',
         sl: '',
         sp: '',
+        lc: '',
+        rc: '',
     }
 
     const [isSearching, setIsSearching] = useState(true);
@@ -16,14 +18,10 @@ export default function TongueTip() {
     const [searchResult, setSearchResult] = useState([]);
     const [queryParams, setQueryParams] = useState(emptyQuery);
     const [relatedWords, setRelatedWords] = useState([]);
-
-    useEffect(() => {
-        console.log(relatedWords);
-    }, [relatedWords])
+    const [topicWords, setTopicWords] = useState([]);
 
     const handleSearch = (event) => {
         event.preventDefault();
-        console.log(queryParams);
         const queryString = prepareQueryString();
         setIsSearching(false);
         setIsLoading(true);
@@ -42,9 +40,13 @@ export default function TongueTip() {
     }
 
     const handleUpdateQuery = (event) => {
-        const name = event.target.name;
-        const value = encodeURIComponent(event.target.value);
-        setQueryParams(values => ({...values, [name]: value}));
+        setQueryParams(values => ({...values, [event.target.name]: event.target.value}));
+    }
+
+    const handleUpdateTopicWord = (event, index) => {
+        const topics = [...topicWords];
+        topics[index]= event.target.value;
+        setTopicWords(topics);
     }
 
     const handleUpdateRelationType = (event, index) => {
@@ -61,22 +63,26 @@ export default function TongueTip() {
 
     const prepareQueryString = () => {
         let query = `https://api.datamuse.com/words?md=d&max=20`;
-        // gotta be some nice way to do this programmatically, right...?
-        if (queryParams.ml !== '') {
-            query += `&ml=${queryParams.ml}`;
-        }
-        if (queryParams.sl !== '') {
-            query += `&sl=${queryParams.sl}`;
-        }
-        if (queryParams.sp !== '') {
-            query += `&sp=${queryParams.sp}`;
-        }
+        Object.keys(queryParams).forEach((key) => {
+            if(queryParams[key] !== '') {
+                let param = `&${key}=${encodeURIComponent(queryParams[key])}`;
+                query += param;
+            }
+        });
         relatedWords.forEach((word) => {
             if (word.relCode !== '' && word.value !== '') {
                 query += `&rel_${word.relCode}=${word.value}`;
             }
         })
-        console.log(query);
+        let topicString = '&topics='
+        topicWords.forEach((word) => {
+            if (word !== '') {
+                topicString += `${word}%20`;
+            }
+        })
+        if (topicString !== '&topics=') {
+            query += topicString;
+        }
         return query;
     }
 
@@ -101,9 +107,18 @@ export default function TongueTip() {
         setRelatedWords(updatedRelations);
     }
 
+    const addNewTopicWord = () => {
+        setTopicWords([...topicWords, '']);
+    }
+
+    const deleteTopicWord = (index) => {
+        const updatedTopicWords = topicWords.toSpliced(index, 1);
+        setTopicWords(updatedTopicWords);
+    }
+
     return (
         <Container className="App-header flex-fill align-items-center justify-content-center">
-            <Col className='col-sm-6 justify-content-center'>
+            <Col className='col-lg-6 justify-content-center'>
                 <div className="mt-4 p-4 rounded" style={{backgroundColor: "rgba(10, 10, 10, 0.7)"}}>
                     <h1>TongueTip</h1>
                     {isSearching ? 
@@ -112,9 +127,14 @@ export default function TongueTip() {
                             handleUpdateText={handleUpdateQuery}
                             handleUpdateRelationType={handleUpdateRelationType}
                             handleUpdateRelatedWord={handleUpdateRelatedWord}
+                            handleUpdateTopicWord={handleUpdateTopicWord}
+                            queryParams={queryParams}
                             relations={relatedWords}
+                            topicWords={topicWords}
                             addNewRelation={addNewRelation}
                             deleteRelation={deleteRelation}
+                            addNewTopicWord={addNewTopicWord}
+                            deleteTopicWord={deleteTopicWord}
                         /> 
                         : 
                         <SearchResults 

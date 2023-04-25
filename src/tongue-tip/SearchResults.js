@@ -16,6 +16,7 @@ export default function SearchResults({ word, isLoading, returnToSearch }) {
                 })}
             </ul>
             <Button variant="outline-light" onClick={() => returnToSearch(true)}>New search</Button>
+            <Button variant="outline-light" onClick={() => returnToSearch(false)}>Refine previous search</Button>
         </>
     }
 }
