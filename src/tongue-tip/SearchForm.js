@@ -5,7 +5,7 @@ export default function SearchForm({ handleSearch, handleUpdateText, handleUpdat
     return(
         <>
             <p>A tool for finding a word that's on the tip of your tongue, powered by the <a href="https://www.datamuse.com/api/">[Datamuse API]</a>.</p>
-            <p>Most parameters accept one "word" as defined by the database.  Some two-word phrases are considered one word.</p>
+            <p>Most parameters accept one "word" as defined by the database.  This includes <i>some</i> two-word phrases, but if you're having trouble getting results with two-word phrases, try changing them to single words.</p>
             <Form autoComplete="off" onSubmit={handleSearch}>
                 <Form.Group controlId="meaning">
                     <Form.Label>Meaning</Form.Label>
@@ -83,13 +83,10 @@ export default function SearchForm({ handleSearch, handleUpdateText, handleUpdat
                     addNewTopicWord={addNewTopicWord}
                     deleteTopicWord={deleteTopicWord}
                 />
-                <Row className="mt-3">
-                    <Col className="d-flex justify-content-center align-items-center">
-                        <p className="pt-3"><a href="/projects">[back to projects]</a></p>
-                    </Col>
-                    <Col className="d-flex justify-content-center align-items-center">
+                <Row>
+                    <Col className="d-flex justify-content-end align-items-center">
                         <Form.Group>
-                            <Button variant="outline-primary" type="submit" xs={4}>Search</Button>
+                            <Button variant="primary" type="submit" xs={4}>Search</Button>
                         </Form.Group>
                     </Col>
                 </Row>

@@ -1,4 +1,4 @@
-import {Container, Col} from 'react-bootstrap';
+import {Container, Col, Row} from 'react-bootstrap';
 import React, {useState} from 'react';
 import axios from 'axios';
 import SearchResults from './SearchResults';
@@ -62,7 +62,7 @@ export default function TongueTip() {
     }
 
     const prepareQueryString = () => {
-        let query = `https://api.datamuse.com/words?md=d&max=20`;
+        let query = `https://api.datamuse.com/words?md=d&max=10`;
         Object.keys(queryParams).forEach((key) => {
             if(queryParams[key] !== '') {
                 let param = `&${key}=${encodeURIComponent(queryParams[key])}`;
@@ -143,6 +143,11 @@ export default function TongueTip() {
                             returnToSearch={returnToSearch} 
                         />
                     }
+                    <Row className="mt-3">
+                        <Col className="d-flex justify-content-center align-items-center">
+                            <p className="pt-3"><a href="/projects">[back to projects]</a></p>
+                        </Col>
+                    </Row>
                 </div>
             </Col>
         </Container>
