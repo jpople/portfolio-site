@@ -4,7 +4,6 @@ import relationOptions from "./relationOptions";
 export default function SearchForm({ handleSearch, handleUpdateText, handleUpdateRelationType, handleUpdateRelatedWord, handleUpdateTopicWord, queryParams, relations, topicWords, addNewRelation, deleteRelation, addNewTopicWord, deleteTopicWord }) {
     return(
         <>
-            <p>A tool for finding a word that's on the tip of your tongue, powered by the <a href="https://www.datamuse.com/api/">[Datamuse API]</a>.</p>
             <p>Most parameters accept one "word" as defined by the database.  This includes <i>some</i> two-word phrases, but if you're having trouble getting results with two-word phrases, try changing them to single words.</p>
             <Form autoComplete="off" onSubmit={handleSearch}>
                 <Form.Group controlId="meaning">
