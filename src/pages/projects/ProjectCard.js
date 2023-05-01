@@ -8,7 +8,7 @@ export default function ProjectCard({projectInfo}) {
                 <h1><a href={projectInfo.infoLink}>{projectInfo.title}</a></h1>
                 {projectInfo.desc}
                 <div className='d-flex flex-row align-items-end justify-content-around'>
-                    {projectInfo.playLink && <p><a href={projectInfo.playLink}>[{projectInfo.playText}]</a></p>}
+                    {projectInfo.playLink && <p><a href={projectInfo.playLink} target="_blank" rel="noreferrer noopener">[{projectInfo.playText}]</a></p>}
                     <p><a href={projectInfo.infoLink}>[more info]</a></p>
                 </div>
             </div>
