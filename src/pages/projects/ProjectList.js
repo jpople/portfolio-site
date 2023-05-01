@@ -7,7 +7,7 @@ import tonguetipScreenshot from '../../images/tonguetip-screenshot-1.png'
 const projectList = [
     {
         title: "TongueTip",
-        desc: <p>A single-page web app for finding a word that you can't think of, based on its meaning, contexts where it's likely to appear and more.  It uses Axios in React to query the <a href="https://www.datamuse.com/api/">[Datamuse API]</a>.</p>, 
+        desc: <p>A single-page web app for finding a word that you can't think of, based on its meaning, contexts where it's likely to appear and more.  It uses Axios to asynchronously query the <a href="https://www.datamuse.com/api/">[Datamuse API]</a>.</p>, 
         screenshotSrc: tonguetipScreenshot,
         playLink: "/projects/tongue-tip",
         playText: "use",
