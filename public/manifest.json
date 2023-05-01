@@ -1,13 +1,6 @@
 {
   "short_name": "jeremypople.dev",
   "name": "Jeremy Pople's portfolio page",
-  "icons": [
-    {
-      "src": "awamori-logo.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    }
-  ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",

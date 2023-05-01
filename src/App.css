@@ -8,11 +8,16 @@ body {
 
 .App {
   min-height: 100vh;
-  font-family: 'Abel';
+  font-family: 'Abel', sans-serif;
+  letter-spacing: 0.05em;
 }
 .App-header {
   display: flex;
   color: white;
+}
+
+.form-text {
+  color: rgb(200, 200, 200, 1)!important;
 }
 
 ul {

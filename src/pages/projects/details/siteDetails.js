@@ -34,6 +34,7 @@ const siteDetails = {
     title: "jeremypople.dev",
     sourceLink: "https://github.com/jpople/portfolio-site",
     playLink: "/",
+    playText: "view",
     videoLink: null,
     pageText: pageText
 }

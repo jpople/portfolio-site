@@ -13,7 +13,7 @@ export default function ProjectDetails({projectDetails}) {
             {projectDetails.videoLink && videoEmbed}
             <h1>{projectDetails.title}</h1>
             <div className='mt-2 d-flex flex-row align-items-end justify-content-around'>
-                    {projectDetails.playLink && <p><a href={projectDetails.playLink}>[play]</a></p>}
+                    {projectDetails.playLink && <p><a href={projectDetails.playLink} target="_blank" rel="noreferrer noopener">[{projectDetails.playText || "play"}]</a></p>}
                     <p><a href={projectDetails.sourceLink}>[source code]</a></p>
                 </div>
             {projectDetails.pageText}
