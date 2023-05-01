@@ -40,6 +40,8 @@ function SingleResult({data}) {
             case "adv":
                 parsedData.partOfSpeech = "(adverb)";
                 break;
+            default:
+                break;
         }
         if (parsedData.partOfSpeech !== "") {
             parsedData.def = data.defs[0].slice(data.defs[0].indexOf("\t"));
