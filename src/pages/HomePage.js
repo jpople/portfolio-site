@@ -12,8 +12,7 @@ export default function HomePage() {
             <p>
               I built this site in React!  Check out <a href="/projects">[projects]</a> to learn more about it, along with several other things that I've made that are arguably more interesting.
             </p>
-            <p>Thanks for stopping by!</p>
-            <p><a href="/projects/tongue-tip">[tongue-tip]</a> -- don't forget to remove this link</p>
+            <p>Thanks for stopping by, and feel free to get in touch over at <a href="/contact">[contact]</a>!</p>
           </div>
         </Col>
       </Container>

@@ -16,6 +16,7 @@ import pipeHackerDetails from './pages/projects/details/pipeHackerDetails';
 import swordGameDetails from './pages/projects/details/swordGameDetails';
 import siteDetails from './pages/projects/details/siteDetails';
 import aquariumDetails from './pages/projects/details/aquariumDetails';
+import tongueTipDetails from './pages/projects/details/tongueTipDetails';
 import NotFoundPage from './pages/NotFound';
 import TongueTip from './tongue-tip/TongueTip';
 
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/projects/aquarium/about",
         element: <ProjectDetails projectDetails={aquariumDetails} />
+      },
+      {
+        path: "/projects/tongue-tip/about",
+        element: <ProjectDetails projectDetails={tongueTipDetails} />
       },
       {
         path: "/projects/aquarium/play",
