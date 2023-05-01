@@ -25,7 +25,7 @@ const pageText = (
 
 const tongueTipDetails = {
     title: "TongueTip",
-    sourceLink: "https://github.com/jpople/portfolio-site",
+    sourceLink: "https://github.com/jpople/portfolio-site/tree/main/src/tongue-tip",
     playLink: "/projects/tongue-tip/",
     playText: "use",
     videoLink: null,
